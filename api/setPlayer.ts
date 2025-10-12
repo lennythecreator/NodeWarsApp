@@ -1,14 +1,16 @@
-require('dotenv').config()
-const BASEURL = process.env.NEXT_PUBLIC_BASE_URL
-export const setPlayer = async (coderTag: string, playerCode: string) => {
+"use server"
+export const setPlayer = async (playerData:{coderTag: string, playerCode: string}) => {
+    const BASEURL = process.env.NEXT_PUBLIC_BASE_URL
+    console.log(BASEURL);
+
     const response = await fetch(`${BASEURL}/CreatePlayer`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            coderTag: coderTag,
-            playerCode: playerCode
+            coderTag: playerData.coderTag,
+            playerCode: playerData.playerCode
         })
     })
 
